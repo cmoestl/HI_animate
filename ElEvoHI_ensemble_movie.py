@@ -1,9 +1,9 @@
 #Animation of ensemble simulations for ElEvoHI
 
-#Author: C. Moestl, IWF Graz, Austria
-#twitter @chrisoutofspace, https://github.com/cmoestl
-#November 2018
-#This work is published under the MIT LICENSE (see bottom)
+# Author: C. Moestl, IWF Graz, Austria
+# twitter @chrisoutofspace, https://github.com/cmoestl
+# November 2018
+# This work is published under the MIT LICENSE (see bottom)
 
 import numpy as np
 import sys
@@ -12,10 +12,8 @@ import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from matplotlib import cm
-
 from scipy import stats
 import scipy.io
-
 import sunpy.time
 import time
 import pickle
@@ -297,6 +295,10 @@ if read_data == 0:
 #initiate plot
 plt.figure(1, figsize=(8, 6), dpi=100, facecolor='w', edgecolor='w')
 
+
+sns.set_context('talk')  
+sns.set_style('darkgrid')
+
 #set start time of movie 
 frame_time_num=mdates.date2num(sunpy.time.parse_time(movie_start_date_time))
 
@@ -314,7 +316,9 @@ for k in np.arange(0,duration_days,dayjump):
  #difference array of current frame time frame_time_num+k to position time frame_time_num
  cmedt=frame_time_num+k-all_apex_t
  #get indices where difference is less than half the time resolution
- cmeind=np.where(abs(cmedt) < dayjump / 2.0)
+ #use this to avoid nan in np.where
+ cmedt[np.isnan(cmedt)]=10000
+ cmeind=np.where(np.abs(cmedt) < dayjump/2)
  #print( 'cmeind', cmeind)
   
 
@@ -571,7 +575,7 @@ for k in np.arange(0,duration_days,dayjump):
    ax.annotate(blegstr[p],xy=(blegt[p],blegr[p]-0.2), ha='center', va='center', fontsize=8)
  
  #set axes
- plt.thetagrids(range(0,360,45),(u'0\u00b0',u'45\u00b0',u'90\u00b0',u'135\u00b0',u'+/- 180\u00b0',u'- 135\u00b0',u'- 90\u00b0',u'- 45\u00b0'), fmt='%d', frac = 1.05)
+ plt.thetagrids(range(0,360,45),(u'0\u00b0',u'45\u00b0',u'90\u00b0',u'135\u00b0',u'+/- 180\u00b0',u'- 135\u00b0',u'- 90\u00b0',u'- 45\u00b0'), fmt='%d')#, frac = 1.05)
  ax.set_theta_zero_location('S')
  plt.rgrids((0.25,0.5,0.75, 1.0,1.25, 1.5, 1.75, 2.0),('0.25','0.5','0.75','1.0','1.25','1.5','1.75','2.0 AU'),angle=150, fontsize=8)
  ax.set_ylim(0, 2.1)
