@@ -681,7 +681,7 @@ for k in np.arange(12680/4,(12680+120)/4,dayjump):
 
 #make animation convert with automator into jpg before
 
-#os.system('/Users/chris/movie/ffmpeg -r 15 -i /Users/chris/python/catpy/animations/animation_icmecat_6hour_fade_circ_insitu_final_full_jpg/icmecat_%04d.jpg -b 5000k -r 15 animations/icmecat_anim_6hour_fade_circ_insitu_final_full.mp4 -y')
+os.system('/Users/chris/movie/ffmpeg -r 15 -i /Users/chris/python/catpy/animations/animation_icmecat_6hour_fade_circ_insitu_final_full_jpg/icmecat_%04d.jpg -b 5000k -r 15 animations/icmecat_anim_6hour_fade_circ_insitu_final_full.mp4 -y')
 
 print( 'made movie')
 

@@ -606,11 +606,11 @@ for k in np.arange(0,duration_days,dayjump):
 ################################################### MAKE MOVIE
 
 #convert to jpg
-os.system(os.getcwd()+'/ffmpeg -i '+current_event_dir+'frames/elevo_%04d.png '+current_event_dir+'frames/elevo_%04d.jpg ')
+os.system(os.getcwd()+'/ffmpeg -i '+current_event_dir+'frames/elevo_%04d.png '+current_event_dir+'frames/elevo_%04d.jpg -y -loglevel quiet')
 #make mp4
-os.system(os.getcwd()+'/ffmpeg -r 20 -i '+current_event_dir+'frames/elevo_%04d.jpg -b:v 5000k -r 20 movies/'+current_event+'_ensemble_movie.mp4 -y')
+os.system(os.getcwd()+'/ffmpeg -r 20 -i '+current_event_dir+'frames/elevo_%04d.jpg -b:v 5000k -r 20 movies/'+current_event+'_ensemble_movie.mp4 -y -loglevel quiet')
 #make gif
-os.system(os.getcwd()+'/ffmpeg -r 20 -i movies/'+current_event+'_ensemble_movie.mp4 -b:v 5000k -r 20 movies/'+current_event+'_ensemble_final.gif -y')
+os.system(os.getcwd()+'/ffmpeg -r 20 -i movies/'+current_event+'_ensemble_movie.mp4 -b:v 5000k -r 20 movies/'+current_event+'_ensemble_final.gif -y -loglevel quiet')
 
 
 plt.close('all')
